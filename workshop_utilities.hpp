@@ -73,22 +73,23 @@ double conditionals(){
 }
 
 //read in matrix file
-void matrix_reader(std::vector<std::vector<double>> v){
+void matrix_reader(){
 
 	std::ifstream data_file;
 	data_file.open("a.mat");
 	int m,n;
 	data_file >> m >> n;
+	std::vector<std::vector<double>> v(m,std::vector<double> (n,0));
 
-	//Read and parse file
-	std::string line,row,col;
-	double a0,a1;
-	for(int i < 0; i < n; ++i){
+	//Read file contents
+	for(int i < 0; i < m; ++i){
+		if (n != 0){
 			for(int i < 0; i < n; ++i){
-				std::getline(ss,row,' ');
-				a1 = std::stod(row);
-				v[i].push_back(a1);
+				data_file >> v[i][j];
 			}
+		}
+		else{
+				data_file >> v[i][0];
 		}
 	}
 }
@@ -113,6 +114,7 @@ struct matrices {
 	std::vector<double> a,b,c,Ax;
 	double alp, beta, ab, sum_j,sum_i,norm_a, tol;
 
+	void matrix_reader();
 	void gaussian_elimination();
 	void gemv();
 	void axpy();
@@ -122,8 +124,31 @@ struct matrices {
 	
 };
 
+
+//read in matrix file
+void matrices::matrix_reader(){
+
+	std::ifstream data_file;
+	data_file.open("a.mat");
+	int m,n;
+	data_file >> m >> n;
+	std::vector<std::vector<double>> v(m,std::vector<double> (n,0));
+	//Read file contents
+	for(int i < 0; i < m; ++i){
+		if (n != 0){
+			for(int i < 0; i < n; ++i){
+				data_file >> v[i][j];
+			}
+		}
+		else{
+				data_file >> v[i][0];
+		}
+	}
+}
+
 // Solve linear linear system via gaussian elimination
 void matrices::gaussian_elimination(){
+
 	for(int i = 0; i < n; ++i){
 		if ( a[i][i] == 0 ) {
 			std::cout << "Singular" << std::endl;
@@ -139,16 +164,6 @@ void matrices::gaussian_elimination(){
 
 }
 
-void matrices::forward_sub(){
-	for(int i = 0; i < n; ++i){
-		for(int i = 0; i < n; ++i){
-
-		}
-	}
-
-
-
-}
 
 void::matrices::solve(){
 	//solve via jacobi (converges for diagonally dominant matrices)

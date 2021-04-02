@@ -7,12 +7,12 @@
 
 int main(){
 
-	int n = 5;
+	int m,n;
 	std::vector<double> u(n);
 	std::vector<std::vector<double>> v(n,std::vector<double> (n,0));
 
 	//read matrix/vector file
-	matrix_reader(v);
+	matrix_reader();
 	
 
 	//matrix testing
@@ -28,5 +28,6 @@ int main(){
 	mat.A = A;
 	mat.B = B;
 	mat.C = C;
+	mat.matrix_reader();
 	return 0;
 }
